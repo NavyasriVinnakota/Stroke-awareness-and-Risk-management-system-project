@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, make_response
 import sqlite3
 from reportlab.pdfgen import canvas
@@ -96,7 +95,6 @@ def submit_health():
     if extra_problems.strip() != "":
         risk_score += 1
 
-    # Final stroke risk result
     if risk_score >= 6:
         risk = "High Risk 🔴"
     elif risk_score >= 3:
@@ -129,7 +127,7 @@ def submit_health():
     )
 
 
-# Reports
+# ✅ FIXED REPORTS
 @app.route('/reports')
 def reports():
     conn = sqlite3.connect('users.db')
@@ -142,10 +140,15 @@ def reports():
 
     latest = data[-1] if data else [0,0,0,0,0,"","",""]
 
+    # ✅ Correct mapping (FIXED)
     age = latest[0]
     weight = latest[1]
+    height = latest[2]
     bp = latest[3]
     sugar = latest[4]
+    smoking = latest[5]
+    family_history = latest[6]
+    extra_problems = latest[7]
 
     ideal_weight = 60
     ideal_bp = 120
@@ -156,15 +159,19 @@ def reports():
         records=data,
         age=age,
         weight=weight,
+        height=height,
         bp=bp,
         sugar=sugar,
+        smoking=smoking,
+        family_history=family_history,
+        extra_problems=extra_problems,
         ideal_weight=ideal_weight,
         ideal_bp=ideal_bp,
         ideal_sugar=ideal_sugar
     )
 
 
-# ✅ PDF DOWNLOAD ROUTE
+# PDF
 @app.route('/download_pdf')
 def download_pdf():
     buffer = BytesIO()
@@ -199,7 +206,7 @@ def download_pdf():
     return response
 
 
-# Prevention Page
+# Prevention
 @app.route('/prevention')
 def prevention():
     return render_template("prevention.html")

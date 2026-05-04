@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stroke Awareness System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    background: linear-gradient(270deg, #e8f5e9, #ffffff, #e3f2fd);
+    background-size: 600% 600%;
+    animation: gradientMove 10s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    width:360px;
+    padding:30px;
+    background:rgba(255,255,255,0.95);
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+    z-index:10;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#2e7d32;
+    border:none;
+    border-radius:8px;
+    color:white;
+    cursor:pointer;
+}
+
+.icon{
+    position:absolute;
+    font-size:40px;
+    animation: floatSoft 6s ease-in-out infinite;
+}
+
+@keyframes floatSoft{
+    0%{ transform: translateY(0px);}
+    50%{ transform: translateY(-10px);}
+    100%{ transform: translateY(0px);}
+}
+
+.f1{left:3%;top:20%;}
+.f2{left:6%;top:45%;}
+.f3{left:4%;bottom:20%;}
+.f4{left:8%;top:70%;}
+.v1{right:3%;top:20%;}
+.v2{right:6%;top:45%;}
+.v3{right:4%;bottom:20%;}
+.v4{right:8%;top:70%;}
+.h1{top:5%;left:40%;}
+.h2{top:5%;right:40%;}
+.h3{bottom:5%;left:40%;}
+.h4{bottom:5%;right:40%;}
+</style>
+</head>
+
+<body>
+
+<div class="icon f1">🍎</div>
+<div class="icon f2">🍉</div>
+<div class="icon f3">🍇</div>
+<div class="icon f4">🥭</div>
+<div class="icon v1">🥦</div>
+<div class="icon v2">🥕</div>
+<div class="icon v3">🍆</div>
+<div class="icon v4">🥬</div>
+<div class="icon h1">💧</div>
+<div class="icon h2">🩺</div>
+<div class="icon h3">🏃</div>
+<div class="icon h4">🤸</div>
+
+<div class="card">
+    <h2>Login</h2>
+
+    <form action="/login" method="POST">
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <br>
+
+    <h2>Signup</h2>
+    <form action="/signup" method="POST">
+        <input type="email" name="email" placeholder="Enter New Email" required>
+        <input type="password" name="password" placeholder="Create Password" required>
+        <button type="submit">Signup</button>
+    </form>
+</div>
+
+</body>
+</html>

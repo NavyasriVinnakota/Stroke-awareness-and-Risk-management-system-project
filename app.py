@@ -4,7 +4,38 @@ from reportlab.pdfgen import canvas
 from io import BytesIO
 
 app = Flask(__name__)
+# ✅ CREATE DATABASE TABLES AUTOMATICALLY
+def create_tables():
+    conn = sqlite3.connect('users.db')
+    cur = conn.cursor()
 
+    # Users table
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT,
+            password TEXT
+        )
+    ''')
+
+    # Health data table
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS health_data (
+            age INTEGER,
+            weight REAL,
+            height REAL,
+            bp INTEGER,
+            sugar INTEGER,
+            smoking TEXT,
+            family_history TEXT,
+            extra_problems TEXT
+        )
+    ''')
+
+    conn.commit()
+    conn.close()
+
+create_tables()
 # Home page
 @app.route('/')
 def home():
